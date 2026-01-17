@@ -1,92 +1,254 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-    <meta charset="UTF-8">
-    <title>My Portfolio</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            background-color: #f4f4f4;
-            color: #333;
-        }
-        header {
-            background-color: #2c3e50;
-            color: white;
-            padding: 40px;
-            text-align: center;
-        }
-        section {
-            padding: 40px;
-            max-width: 800px;
-            margin: auto;
-            background-color: white;
-            margin-top: 20px;
-            border-radius: 8px;
-        }
-        h2 {
-            color: #2c3e50;
-        }
-        .skills span {
-            display: inline-block;
-            background: #3498db;
-            color: white;
-            padding: 8px 12px;
-            margin: 5px;
-            border-radius: 20px;
-            font-size: 14px;
-        }
-        footer {
-            text-align: center;
-            padding: 20px;
-            margin-top: 40px;
-            color: #777;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>In | Developer Portfolio</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #0d1117;
+      --card-bg: rgba(255,255,255,0.06);
+      --border: rgba(255,255,255,0.12);
+      --text: #c9d1d9;
+      --muted: #8b949e;
+      --accent: #2ea043;
+      --radius: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Kanit', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    /* ===== Layout ===== */
+    .container {
+      display: flex;
+      min-height: 100vh;
+      gap: 24px;
+      padding: 24px;
+    }
+
+    /* ===== Sidebar ===== */
+    .sidebar {
+      width: 28%;
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      text-align: center;
+    }
+
+    .profile-img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 3px solid var(--accent);
+      object-fit: cover;
+      margin-bottom: 16px;
+    }
+
+    .sidebar h2 {
+      margin: 8px 0 4px;
+    }
+
+    .sidebar p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .contact {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      font-size: 20px;
+    }
+
+    /* ===== Main Content ===== */
+    .main {
+      width: 72%;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.3);
+    }
+
+    /* ===== Resume ===== */
+    .typing {
+      color: var(--accent);
+      font-weight: 500;
+      min-height: 24px;
+    }
+
+    .tech-list {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 16px;
+    }
+
+    .tech-list li {
+      margin-bottom: 6px;
+    }
+
+    /* ===== Projects ===== */
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .project-card {
+      transition: transform .2s ease, box-shadow .2s ease;
+      cursor: pointer;
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 0 0 1px var(--accent);
+    }
+
+    /* ===== Contribution Graph ===== */
+    .graph {
+      display: grid;
+      grid-template-columns: repeat(14, 1fr);
+      gap: 6px;
+      margin-top: 12px;
+    }
+
+    .cell {
+      width: 100%;
+      padding-top: 100%;
+      background: #161b22;
+      border-radius: 4px;
+      position: relative;
+      transition: background .2s;
+    }
+
+    .cell[data-level="1"] { background: #0e4429; }
+    .cell[data-level="2"] { background: #006d32; }
+    .cell[data-level="3"] { background: #26a641; }
+    .cell[data-level="4"] { background: #39d353; }
+
+    .cell:hover {
+      outline: 1px solid #fff;
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 900px) {
+      .container {
+        flex-direction: column;
+      }
+      .sidebar, .main {
+        width: 100%;
+      }
+      .projects {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
 
-<header>
-    <h1>ชื่อ ก้องภพ สมนัส </h1>
-    <p>Web Developer | Designer | Student</p>
-</header>
+  <div class="container">
 
-<section>
-    <h2>เกี่ยวกับฉัน</h2>
-    <p>
-        สวัสดีครับ ผมเป็นผู้ที่สนใจด้านการพัฒนาเว็บไซต์  
-        มีความชอบในการเรียนรู้เทคโนโลยีใหม่ๆ และกำลังเรียนรู้เกี่ยวกับมัน
-    </p>
-</section>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <img src="https://avatars.githubusercontent.com/u/0?v=4" class="profile-img" alt="profile">
+      <h2>ก้องภพ สมนัส (อิน)</h2>
+      <p>ฉันเป็นแค่คนที่สนใจเกี่ยวกับคอมพิวเตอร์และการเขียนโค้ด</p>
 
-<section>
-    <h2>ทักษะ</h2>
-    <div class="skills">
-        <span>HTML</span>
-        <span>CSS</span>
-        <span>JavaScript</span>
-        <span>React</span>
-    </div>
-</section>
+      <div class="contact">
+        <a href="https://github.com/68040249115-lang" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="mailto:exist276@gamil.com"><i class="fas fa-envelope"></i></a>
+      </div>
+    </aside>
 
-<section>
-    <h2>ผลงาน</h2>
-    <ul>
-        <li>แมพ Roblox</li>
-        <li>เว็บแนะนำตัว</li>
-        <li>ระบบจัดการข้อมูล</li>
-    </ul>
-</section>
+    <!-- Main -->
+    <main class="main">
 
-<section>
-    <h2>ติดต่อ</h2>
-    <p>Email: 68040249115@udru.ac.th</p>
-    <p>GitHub: https/url.in.th/oNTyz</p>
-</section>
+      <!-- Resume -->
+      <section class="card">
+        <h2>สวัสดีครับ! ผมชื่อ อิน 👋</h2>
+        <p class="typing" id="typing"></p>
 
-<footer>
-    © 2026 Your Name
-</footer>
+        <ul class="tech-list">
+          <li>💻 HTML, CSS, JavaScript</li>
+          <li>🎮 สนใจพัฒนาเกม และ Roblox</li>
+          <li>📚 เรียนรู้ Frontend & Web Design</li>
+        </ul>
+      </section>
+
+      <!-- Projects -->
+      <section class="card">
+        <h3>📌 Showcase Projects</h3>
+        <div class="projects">
+          <div class="card project-card">RobloxThaHi</div>
+          <div class="card project-card">RobloxThaHi</div>
+          <div class="card project-card">RobloxThaHi</div>
+          <div class="card project-card">RobloxThaHi</div>
+        </div>
+      </section>
+
+      <!-- Contribution -->
+      <section class="card">
+        <h3>📊 Contribution Graph</h3>
+        <div class="graph">
+          <!-- Mock cells -->
+          <script>
+            for (let i = 0; i < 98; i++) {
+              const level = Math.floor(Math.random() * 5);
+              document.write(`<div class="cell" data-level="${level}"></div>`);
+            }
+          </script>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Typing Effect -->
+  <script>
+    const text = "ผมชอบเขียนโค้ดและเรียนรู้เทคโนโลยีใหม่ๆ...";
+    let index = 0;
+    const speed = 60;
+    const el = document.getElementById("typing");
+
+    function type() {
+      if (index < text.length) {
+        el.textContent += text.charAt(index);
+        index++;
+        setTimeout(type, speed);
+      }
+    }
+
+    type();
+  </script>
 
 </body>
 </html>
